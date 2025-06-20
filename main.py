@@ -97,7 +97,6 @@ project_files = {
     "card": ["card/generator.py"],
     "calculator-app": ["calc/engine.py", "calc/ui.py"],
 }
-
 def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
     payload = {
         "entity": filename,
@@ -108,15 +107,39 @@ def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
         "is_write": is_write,
         "is_save": is_save,
         "branch": "main",
-        "cursorpos": {"row": random.randint(1, 120), "column": random.randint(1, 80)},
+        "cursorpos": {
+            "row": random.randint(1, 120),
+            "column": random.randint(1, 80)
+        },
         "editor": "Visual Studio Code",
         "operating_system": "Windows"
     }
 
-    response = requests.post(API_URL, headers=HEADERS, json=[payload])
-    status = response.status_code
-    print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {status}")
-    return status
+    # 👇 Gửi đúng định dạng object, không phải array
+    response = requests.post(API_URL, headers=HEADERS, json=payload)
+
+    print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {response.status_code}")
+    return response.status_code
+
+# def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
+#     payload = {
+#         "entity": filename,
+#         "time": timestamp,
+#         "type": "file",
+#         "project": project,
+#         "language": "Python",
+#         "is_write": is_write,
+#         "is_save": is_save,
+#         "branch": "main",
+#         "cursorpos": {"row": random.randint(1, 120), "column": random.randint(1, 80)},
+#         "editor": "Visual Studio Code",
+#         "operating_system": "Windows"
+#     }
+
+#     response = requests.post(API_URL, headers=HEADERS, json=[payload])
+#     status = response.status_code
+#     print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {status}")
+#     return status
 
 # ▶️ Chạy mô phỏng
 start_time = datetime.utcnow()
