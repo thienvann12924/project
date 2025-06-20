@@ -68,7 +68,7 @@ import random
 import os
 
 # 🛡️ Thay bằng API KEY HackaTime thật của bạn (lấy từ lệnh setup.ps1)
-API_KEY = "YOUR_HACKATIME_API_KEY_HERE"
+API_KEY = "7a1a1972-3985-44fe-a078-0f19eb1ed764"
 API_URL = "https://hackatime.hackclub.com/api/hackatime/v1/users/current/heartbeats"
 
 HEADERS = {
