@@ -111,10 +111,12 @@ def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
             "row": random.randint(1, 120),
             "column": random.randint(1, 80)
         },
-        "editor": "Visual Studio Code",
-        "operating_system": "Windows",
-        "plugin": "vscode/1.89.0",  # 🆕 Quan trọng!
+        "plugin": "Windows/Visual Studio Code",
         "category": "coding"
+        # "editor": "Visual Studio Code",
+        # "operating_system": "Windows",
+        # "plugin": "vscode/1.89.0",  # 🆕 Quan trọng!
+        # "category": "coding"
     }
 
     response = requests.post(API_URL, headers=HEADERS, json=payload)
