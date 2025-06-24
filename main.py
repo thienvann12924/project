@@ -111,7 +111,7 @@ def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
             "row": random.randint(1, 120),
             "column": random.randint(1, 80)
         },
-        "plugin": "Windows/Visual Studio Code",
+        "plugin": "Windows/Vscode",
         "category": "coding"
         # "editor": "Visual Studio Code",
         # "operating_system": "Windows",
