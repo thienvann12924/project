@@ -112,15 +112,43 @@ def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
             "column": random.randint(1, 80)
         },
         "editor": "Visual Studio Code",
-        "operating_system": "Windows"
+        "operating_system": "Windows",
+        "plugin": "vscode/1.89.0",  # 🆕 Quan trọng!
+        "category": "coding"
     }
 
-    # 👇 Gửi đúng định dạng object, không phải array
     response = requests.post(API_URL, headers=HEADERS, json=payload)
 
     print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {response.status_code}")
     return response.status_code
 
+#Ver 3.0
+# def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
+#     payload = {
+#         "entity": filename,
+#         "time": timestamp,
+#         "type": "file",
+#         "project": project,
+#         "language": "Python",
+#         "is_write": is_write,
+#         "is_save": is_save,
+#         "branch": "main",
+#         "cursorpos": {
+#             "row": random.randint(1, 120),
+#             "column": random.randint(1, 80)
+#         },
+#         "editor": "Visual Studio Code",
+#         "operating_system": "Windows"
+#     }
+
+#     # 👇 Gửi đúng định dạng object, không phải array
+#     response = requests.post(API_URL, headers=HEADERS, json=payload)
+
+#     print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {response.status_code}")
+#     return response.status_code
+
+
+# Ver 2.0
 # def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
 #     payload = {
 #         "entity": filename,
