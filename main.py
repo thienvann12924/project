@@ -39,9 +39,6 @@ project_files = {
     "calculator-app": ["calc/engine.py", "calc/ui.py"],
 }
 
-logging.basicConfig(level=logging.DEBUG)
-logging.getLogger("requests").setLevel(logging.DEBUG)
-logging.getLogger("urllib3").setLevel(logging.DEBUG)
 def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
     payload = {
         "entity": filename,
@@ -52,48 +49,18 @@ def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
         "is_write": is_write,
         "is_save": is_save,
         "branch": "main",
-        "cursorpos": {"row": random.randint(1,120), "column": random.randint(1,80)},
-        "plugin": "Windows/Visual Studio Code",
+        "cursorpos": {
+            "row": random.randint(1, 120),
+            "column": random.randint(1, 80)
+        },
+        "plugin": "Windows/Vscode",
         "category": "coding"
     }
 
-    # In payload và header trước khi gửi
-    print("\n--- REQUEST ▶️")
-    print("URL:  ", API_URL)
-    print("HEAD:", HEADERS)
-    print("BODY:", json.dumps(payload, indent=2))
-
     response = requests.post(API_URL, headers=HEADERS, json=payload)
 
-    # In response chi tiết
-    print("\n--- RESPONSE ◀️")
-    print("Status code: ", response.status_code)
-    print("Resp headers:", response.headers)
-    print("Resp body:   ", response.text)
-
+    print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {response.status_code}")
     return response.status_code
-# def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
-#     payload = {
-#         "entity": filename,
-#         "time": timestamp,
-#         "type": "file",
-#         "project": project,
-#         "language": "Python",
-#         "is_write": is_write,
-#         "is_save": is_save,
-#         "branch": "main",
-#         "cursorpos": {
-#             "row": random.randint(1, 120),
-#             "column": random.randint(1, 80)
-#         },
-#         "plugin": "Windows/Vscode",
-#         "category": "coding"
-#     }
-
-#     response = requests.post(API_URL, headers=HEADERS, json=payload)
-
-#     print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {response.status_code}")
-#     return response.status_code
 
 
 # ▶️ Chạy mô phỏng
@@ -115,7 +82,7 @@ for project, duration_minutes in project_blocks:
         # Gửi mỗi 30–60 giây (có thể giảm time.sleep khi test)
         interval = random.randint(30, 60)
         current_time += timedelta(seconds=interval)
-        time.sleep(0.1)  # ⚠️ Khi chạy thật hãy dùng: time.sleep(interval)
+        time.sleep(interval)  # ⚠️ Khi chạy thật hãy dùng: time.sleep(interval)
 
 print("🎉 Simulation complete.")
 
