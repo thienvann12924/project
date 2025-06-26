@@ -4,8 +4,6 @@ import time
 import requests
 import random
 import os
-import json
-import logging
 
 # 🛡️ Thay bằng API KEY HackaTime thật của bạn (lấy từ lệnh setup.ps1)
 API_KEY = "7a1a1972-3985-44fe-a078-0f19eb1ed764"
