@@ -122,6 +122,10 @@ def send_heartbeat(project, filename, timestamp, is_write=False, is_save=False):
     response = requests.post(API_URL, headers=HEADERS, json=payload)
 
     print(f"[{datetime.utcnow()}] ✅ Heartbeat ➜ Project: {project}, File: {filename}, Write: {is_write}, Save: {is_save}, Status: {response.status_code}")
+    print("Status:", response.status_code)
+    print("Response headers:", response.headers)
+    print("Response body:", response.text)
+
     return response.status_code
 
 #Ver 3.0
