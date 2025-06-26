@@ -66,6 +66,7 @@ import time
 import requests
 import random
 import os
+import sys
 
 # 🛡️ Thay bằng API KEY HackaTime thật của bạn (lấy từ lệnh setup.ps1)
 API_KEY = "7a1a1972-3985-44fe-a078-0f19eb1ed764"
@@ -75,6 +76,16 @@ HEADERS = {
     "Authorization": f"Bearer {API_KEY}",
     "Content-Type": "application/json"
 }
+def check_api_key():
+    r = requests.get(f"{API_URL}", headers=HEADERS)
+    print("🔍 GET /users/current ➜", r.status_code, r.text)
+    if r.status_code != 200:
+        print("❌ API key không hợp lệ hoặc bị block. Dừng chương trình.")
+        sys.exit(1)
+    else:
+        print("✅ API key OK, tiếp tục heartbeat.\n")
+
+check_api_key()
 
 # ⏱️ Project và thời gian giả lập (phút)
 project_blocks = [
