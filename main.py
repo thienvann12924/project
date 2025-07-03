@@ -4,19 +4,21 @@ import time
 import requests
 import random
 import os
-import socket
 import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
-def fake_web_server():
-    s = socket.socket()
-    s.bind(('0.0.0.0', 10000))  # bất kỳ cổng nào
-    s.listen(1)
-    while True:
-        conn, addr = s.accept()
-        conn.close()
+class DummyHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Service is alive.")
 
-threading.Thread(target=fake_web_server, daemon=True).start()
+def start_dummy_server():
+    server = HTTPServer(("0.0.0.0", 10000), DummyHandler)
+    server.serve_forever()
+
+threading.Thread(target=start_dummy_server, daemon=True).start()
 
 
 # 🛡️ Thay bằng API KEY HackaTime thật của bạn (lấy từ lệnh setup.ps1)
