@@ -4,21 +4,21 @@ import time
 import requests
 import random
 import os
-import threading
-from http.server import HTTPServer, BaseHTTPRequestHandler
+# import threading
+# from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
-class DummyHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(b"Service is alive.")
+# class DummyHandler(BaseHTTPRequestHandler):
+#     def do_GET(self):
+#         self.send_response(200)
+#         self.end_headers()
+#         self.wfile.write(b"Service is alive.")
 
-def start_dummy_server():
-    server = HTTPServer(("0.0.0.0", 10000), DummyHandler)
-    server.serve_forever()
+# def start_dummy_server():
+#     server = HTTPServer(("0.0.0.0", 10000), DummyHandler)
+#     server.serve_forever()
 
-threading.Thread(target=start_dummy_server, daemon=True).start()
+# threading.Thread(target=start_dummy_server, daemon=True).start()
 
 
 # 🛡️ Thay bằng API KEY HackaTime thật của bạn (lấy từ lệnh setup.ps1)
@@ -96,7 +96,7 @@ for project, duration_minutes in project_blocks:
         # Gửi mỗi 30–60 giây (có thể giảm time.sleep khi test)
         interval = random.randint(30, 60)
         current_time += timedelta(seconds=interval)
-        time.sleep(15)  # ⚠️ Khi chạy thật hãy dùng: time.sleep(interval)
+        time.sleep(5)  # ⚠️ Khi chạy thật hãy dùng: time.sleep(interval)
 
 print("🎉 Simulation complete.")
 
