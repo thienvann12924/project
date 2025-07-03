@@ -4,6 +4,20 @@ import time
 import requests
 import random
 import os
+import socket
+import threading
+
+
+def fake_web_server():
+    s = socket.socket()
+    s.bind(('0.0.0.0', 10000))  # bất kỳ cổng nào
+    s.listen(1)
+    while True:
+        conn, addr = s.accept()
+        conn.close()
+
+threading.Thread(target=fake_web_server, daemon=True).start()
+
 
 # 🛡️ Thay bằng API KEY HackaTime thật của bạn (lấy từ lệnh setup.ps1)
 API_KEY = "7a1a1972-3985-44fe-a078-0f19eb1ed764"
