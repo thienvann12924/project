@@ -96,7 +96,7 @@ for project, duration_minutes in project_blocks:
         # Gửi mỗi 30–60 giây (có thể giảm time.sleep khi test)
         interval = random.randint(30, 60)
         current_time += timedelta(seconds=interval)
-        time.sleep(5)  # ⚠️ Khi chạy thật hãy dùng: time.sleep(interval)
+        time.sleep(2)  # ⚠️ Khi chạy thật hãy dùng: time.sleep(interval)
 
 print("🎉 Simulation complete.")
 
